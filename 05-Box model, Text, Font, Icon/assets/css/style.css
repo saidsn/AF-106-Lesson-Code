@@ -1,0 +1,49 @@
+
+
+@font-face {
+    font-family: "Edu AU VIC WA NT Guides";
+    src: url(../fonts/EduAUVICWANTGuides-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: "QwitcherGrypen";
+    src: url(../fonts/QwitcherGrypen-Bold.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.test {
+  max-width: 200px;
+  /* text-align: center; */
+  /* text-align: end; */
+  text-align-first: justify;
+  
+  /* text-decoration: underline; */
+  /* text-decoration:line-through; */
+  /* text-decoration-line: overline underline;
+  text-decoration-color: purple; */
+  /* text-decoration: line-through red solid 2px; */
+  /* text-transform: capitalize; */
+  /* text-transform: uppercase; */
+  /* letter-spacing: 10px; */
+  /* word-spacing: 10px; */
+  /* white-space: nowrap; */
+  /* line-height: 30px; */
+  /* font-size: 30px;
+  text-shadow: 2px 2px 2px blue; */
+  /* font-style: italic;
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: 'Courier New', Courier, monospace; */
+  /* font: italic small-caps bolder 20px/25px 'Courier New', Courier, monospace; */
+  font-family: "Edu AU VIC WA NT Guides";
+}
+
+h1{
+    font-family: "QwitcherGrypen";
+}
+
+
