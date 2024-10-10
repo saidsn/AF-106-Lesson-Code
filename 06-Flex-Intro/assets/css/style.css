@@ -29,22 +29,15 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+.start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .starBox {
   display: flex;
   gap: 1rem;
   align-items: center;
-}
-.start {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.starLine {
-  width: 11.2rem;
-  height: 0.4rem;
-  background-color: white;
-  border-radius: 0.5rem;
 }
 .image {
   width: 24rem;
@@ -52,6 +45,12 @@ a:hover {
 .header {
   text-transform: uppercase;
   font-size: 6.4rem;
+}
+.starLine {
+  width: 11.2rem;
+  height: 0.4rem;
+  background-color: white;
+  border-radius: 0.5rem;
 }
 .starBox,
 .header,
