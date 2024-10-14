@@ -1,0 +1,285 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* .container {
+  width: 96rem;
+  height: 60rem;
+  margin: 0 auto;
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 10rem;
+  height: 10rem;
+  background-color: #e80a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease;
+  margin-top: 30rem;
+
+
+} */
+/* 
+button {
+  width: 200px;
+  height: 30px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+
+}
+button::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: cadetblue;
+  position: absolute;
+  top: 0;
+  left: -120%;
+  transition: all 0.5s ease;
+  transform: skew(-20deg);
+  z-index: -1;
+}
+
+button:hover::before {
+  left: -50%;
+}
+
+
+
+
+
+
+
+
+label {
+  width: 50px;
+  height: 50px;
+  padding: 20px;
+  background-color: rgb(49, 75, 66);
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+label input {
+  display: none;
+}
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 50px 20px;
+  transition: all 0.5s ease;
+  transform: translate(100%);
+}
+.list, .item{
+    list-style: none;
+    font-size: 20px;
+    margin-bottom:10px ;
+}
+.check:checked + .sidebar{
+    transform: translateX(0);
+} */
+
+/* .popap {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.popap-content {
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.check:checked + .popap .popap-content {
+  visibility: visible;
+  opacity: 1;
+  border-radius: 20px;
+} */
+
+/* 
+.popap{
+    width: 200px;
+    height: 200px;
+    background-color: whitesmoke;
+    border: 2px dashed black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.popap-content{
+    width: inherit;
+    height: inherit;
+    background-color: red;
+    transform:  matrix(0, -1.5, 1.5, -0.26449, 0, -150);
+    transition: 1s transform;
+}
+.popap-content:hover{
+    transform: rotate(360deg);
+    transform-origin: 50px 100px;
+} */
+
+/* .popap {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.popap img {
+  width: 100%;
+  height: 100%;
+  transition: 1s transform;
+}
+
+.popap img:hover {
+  transform: scale(1.5);
+} */
+
+/* .animation {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  animation-name: box;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: alternate-reverse;
+  animation-timing-function:linear;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes box {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(calc(100vw - 100px), 0) rotate(720deg);
+  }
+  50% {
+    transform: translate(calc(100vw - 100px), calc(100vh - 100px))
+      rotate(720deg);
+  }
+  75% {
+    transform: translate(0, calc(100vh - 100px)) rotate(1080deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(1440deg);
+  }
+} */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f1f1f1;
+}
+
+.road {
+  background: url(../images/arka.jpg);
+  height: 500px;
+  width: 960px;
+  background-size: cover;
+  position: absolute;
+  animation-name: move;
+  animation-direction: normal;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  overflow: hidden;
+}
+
+.car {
+  background: url(../images/arac.png);
+  width: 420px;
+  height: 150px;
+  position: absolute;
+  top: 280px;
+  left: 100px;
+  animation-name: car;
+  animation-direction: normal;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.whell {
+  background: url(../images/teker.png);
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  position: absolute;
+  top: 79px;
+  animation-name: rotate;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+}
+.whell:nth-child(1) {
+  left: 39px;
+}
+.whell:nth-child(2) {
+  left: 306px;
+}
+
+@keyframes rotate {
+  from {
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes move {
+  from {
+  }
+  to {
+    background-position: -960px 0;
+  }
+}
+
+@keyframes car {
+  from {
+  }
+  to {
+    left: 1000px;
+  }
+}
