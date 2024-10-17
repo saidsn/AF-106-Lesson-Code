@@ -1,0 +1,88 @@
+@import "variables";
+@import "reset";
+
+@function grid($columnCount, $totalColumnCount) {
+  @return percentage($columnCount / $totalColumnCount);
+}
+
+.container {
+  //   display: flex;
+  //   .box1 {
+  //     width: grid(3, 12);
+  //     height: 30px;
+  //     background-color: $boxColor;
+  //   }
+  //   .box2 {
+  //     width: grid(6, 12);
+  //     height: 30px;
+  //     background-color: $borderColor;
+  //   }
+  //   .box3 {
+  //     width: grid(3, 12);
+  //     height: 30px;
+  //     background-color: $baseColor;
+  //   }
+
+  // .nav{
+  //     height: 50px;
+  //     &_list{
+  //         width: 500px;
+  //         display: flex;
+  //         justify-content: space-between;
+  //         &-item{
+  //             a{
+  //                 color: $baseColor;
+  //                 font-size: 1.6rem;
+  //                 &:hover{
+  //                     color: $boxColor;
+  //                 }
+  //             }
+
+  //         }
+  //     }
+  // }
+
+  //   @mixin baseBox($color, $width) {
+  //     width: $width;
+  //     height: 200px;
+  //     border-radius: 20px;
+  //     margin: 5px;
+  //     background-color: $color;
+  //   }
+
+  //   .box1 {
+  //     @include baseBox(aqua, 100px);
+  //   }
+  //   .box2 {
+  //     @include baseBox(pink, 400px);
+  //   }
+
+  //   .btn {
+  //     width: 100px;
+  //     height: 50px;
+  //     border-radius: 10px;
+  //   }
+
+  //   .btn1 {
+  //     border: 1px solid $borderColor;
+  //     background-color: $boxColor;
+  //     @extend .btn;
+  //   }
+  //   .btn2 {
+  //     @extend .btn;
+  //     border: 1px solid $borderColor;
+  //     background-color: $bodyColor;
+  //   }
+
+  //   @function color($topbottom, $rightleft) {
+  //     @return $topbottom / 16 + rem $rightleft / 16 + rem;
+  //   }
+
+  //   .box {
+  //     margin: color(32, 48);
+  //     width: 100px;
+  //     height: 100px;
+  //     border: 1px solid $borderColor;
+  //     background-color: $boxColor;
+  //   }
+}
