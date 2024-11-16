@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <title>BOM-TODOLIST</title>
+  </head>
+
+  <!-- <style>
+    .container {
+      max-width: 500px;
+      margin: 100px auto;
+    }
+    .loading {
+      border: 1px solid #000;
+      border-radius: 15px;
+      position: relative;
+    }
+    .loadingItem{
+        border-radius: 15px;
+        background-color: green;
+        width: 0;
+        height: 20px;
+        transition: 0.1s linear;
+    }
+    .count{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+  </style> -->
+  <body>
+    <!-- <h1></h1> -->
+    <!-- 
+    <div class="container">
+      <div class="loading">
+        <div class="loadingItem"></div>
+        <div class="count">0</div>
+      </div>
+    </div> -->
+
+    <div class="container">
+      <div class="addTask">
+        <form>
+          <input id="input" type="text" placeholder="Add your task" />
+          <button id="add" class="btn" type="submit">Add Task</button>
+        </form>
+      </div>
+      <div class="taskList">
+        <ul class="list">
+          <!-- <li class="list_item">
+            <span class="task">Task</span>
+            <div class="setting">
+              <i class="fa-solid fa-trash-can"></i>
+              <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+      <button class="btn deleteAllBtn">DeleteAll</button>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/todo.js"></script>
+  </body>
+</html>
