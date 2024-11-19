@@ -1,0 +1,32 @@
+
+.sliderContainer{
+  overflow: hidden;
+  position: relative;
+}
+
+.slides{
+  display: flex;
+}
+
+.slide{
+  min-width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prev, .next{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.next{
+  right: 15px;
+}
+.prev{
+  left: 15px;
+}
