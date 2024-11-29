@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "age": 34
+    },
+    {
+      "id": "2",
+      "name": "Jane Doe",
+      "age": 28
+    },
+    {
+      "id": "3",
+      "name": "John Smith",
+      "age": 45
+    },
+    {
+      "id": 4,
+      "name": "Ekber",
+      "age": 22
+    },
+    {
+      "id": 4,
+      "name": "Ekber",
+      "age": 22
+    },
+    {
+      "id": 4,
+      "name": "Ekber",
+      "age": 22
+    },
+    {
+      "id": 6,
+      "name": "Ali",
+      "age": 20
+    },
+    {
+      "id": 6,
+      "name": "Ali",
+      "age": 20
+    },
+    {
+      "id": 7,
+      "name": "Seda",
+      "age": 19
+    }
+  ]
+}
