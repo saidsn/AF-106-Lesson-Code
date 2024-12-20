@@ -1,0 +1,19 @@
+.category{
+    width: 100%;
+    height: 50px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+    color: chocolate;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.icons{
+    display: flex;
+   gap: 10px;
+   cursor: pointer;
+   font-size: 30px;
+}

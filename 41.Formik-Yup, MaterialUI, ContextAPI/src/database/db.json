@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "36b9",
+      "name": "Seid",
+      "surname": "Nuraliyev",
+      "username": "said_89",
+      "email": "seidvahidli@gmail.com",
+      "password": "12345Az!",
+      "confirmpassword": "12345Az!",
+      "isLogin": true
+    }
+  ]
+}
