@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -16,6 +16,10 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import Person3Icon from "@mui/icons-material/Person3";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { searchProduct } from "../../redux/features/productSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,28 +62,47 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [users, setUsers] = useState([]);
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const getUsers = async () => {
+    const { data } = await axios("http://localhost:3000/users");
+    setUsers(data);
   };
+
+  const existUser = users.find((user) => user.isLogin === true);
+
+  const handleLogout = async () => {
+    existUser.isLogin = false;
+    await axios.put(`http://localhost:3000/users/${existUser.id}`, existUser);
+  };
+
+  const { products } = useSelector((state) => state.basket);
+
+  const totalCount = products.reduce(
+    (sum, product) => sum + product.quantity,
+    0
+  );
+
+  const dispatch = useDispatch();
+
+  const handleSearch = (value) => {
+    dispatch(searchProduct(value));
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -98,69 +121,39 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/register">Register</Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/login">Login</Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/">Logout</Link>
-      </MenuItem>
+      {existUser ? (
+        <>
+          <MenuItem>
+            <Link>{existUser ? existUser.username : null}</Link>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleMenuClose(), handleLogout();
+            }}
+          >
+            <Link to="/">Logout</Link>
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem onClick={handleMenuClose}>
+            <Link to="/register">Register</Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <Link to="/login">Login</Link>
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <FavoriteIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <Person3Icon />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+  const Hello = () => {
+    if (!existUser) {
+      navigate("/login");
+    } else {
+      navigate("/wishlist");
+    }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -184,6 +177,7 @@ export default function Navbar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => handleSearch(e.target.value)}
             />
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -196,6 +190,9 @@ export default function Navbar() {
             <Button sx={{ my: 2, color: "white", display: "block" }}>
               <Link to="/contact">Contact</Link>
             </Button>
+            <Button sx={{ my: 2, color: "white", display: "block" }}>
+              <Link to="/admin">AdminPanel</Link>
+            </Button>
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -203,19 +200,22 @@ export default function Navbar() {
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
+              onClick={() => {
+                Hello();
+              }}
             >
-              <Badge badgeContent={1} color="error">
-                <FavoriteIcon />
-              </Badge>
+              <FavoriteIcon />
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={1} color="error">
-                <ShoppingCartIcon />
-              </Badge>
+              <Link to="/basket">
+                <Badge badgeContent={totalCount} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </Link>
             </IconButton>
             <IconButton
               size="large"
@@ -233,9 +233,7 @@ export default function Navbar() {
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
               color="inherit"
             >
               <MoreIcon />
@@ -243,7 +241,6 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMenu}
     </Box>
   );

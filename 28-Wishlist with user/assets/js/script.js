@@ -401,7 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     }).showToast();
   }
-  updateBasketCount();
   updateUserStatus();
   createUserCard();
 });

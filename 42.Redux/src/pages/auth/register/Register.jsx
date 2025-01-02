@@ -1,7 +1,7 @@
 import React from "react";
 import "./Register.css";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import axios from "axios";
@@ -20,7 +20,7 @@ const Register = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-    });;
+    });
 
   const submitForm = async (values, action) => {
     const { data } = await axios.get("http://localhost:3000/users");
@@ -39,7 +39,6 @@ const Register = () => {
       action.resetForm();
       navigate("/login");
     }, 2000);
-    
   };
 
   const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -51,6 +50,8 @@ const Register = () => {
       password: "",
       confirmpassword: "",
       isLogin: false,
+      wishlist: [],
+      basket: [],
     },
     onSubmit: submitForm,
     validationSchema: registerschema,
@@ -141,6 +142,10 @@ const Register = () => {
             value={values.confirmpassword}
             onChange={handleChange}
           />
+        </div>
+        <div>
+          Already have an account?
+          <Link to="/login"> Sign In</Link>
         </div>
         <button className="register-btn" type="submit">
           Sign Up

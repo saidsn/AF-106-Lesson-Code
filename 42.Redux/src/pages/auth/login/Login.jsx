@@ -4,7 +4,7 @@ import "./Login.css";
 import axios from "axios";
 import { loginschema } from "../../../schemas/LoginSchema";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate(); // useNavigate hook is used to navigate between pages
@@ -88,6 +88,10 @@ const Login = () => {
             value={values.password}
             onChange={handleChange}
           />
+        </div>
+        <div>
+          Don't have an account?
+          <Link to="/register"> Sign Up</Link>
         </div>
         <button className="register-btn" type="submit">
           Sign In

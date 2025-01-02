@@ -7,6 +7,11 @@ import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
 import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
+import NotFoundPage from "./pages/NotFoundPage";
+import Wishlist from "./pages/wishlist/Wishlist";
+import Basket from "./pages/basket/Basket";
+import ProductDetail from "./pages/productdetail/ProductDetail";
+import AdminPanel from "./pages/admin/AdminPanel";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +30,22 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
+      },
+      {
+        path: "/basket",
+        element: <Basket />,
+      },
+      {
+        path: "/productdetail/:id",
+        element: <ProductDetail />,
+      },
+      {
+        path: "/admin",
+        element: <AdminPanel />,
+      },
     ],
   },
   {
@@ -34,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
