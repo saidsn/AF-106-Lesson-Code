@@ -1,0 +1,17 @@
+{
+  "users": [
+    { "id": "2", "name": "Mehemmed", "age": 20, "isMarried": false },
+    {
+      "id": "0b299daa-6f0b-4fd5-ae90-0fe151ec9c01",
+      "name": "Guler",
+      "age": 33,
+      "isMarried": false
+    },
+    {
+      "id": "bb3ab107-090e-4da0-9fd4-91b8c1b4479d",
+      "name": "Nihad",
+      "age": 33,
+      "isMarried": true
+    }
+  ]
+}
