@@ -10,6 +10,9 @@ import Admin from "./pages/admin/Admin";
 import ProductDetail from "./pages/productdetail/ProductDetail";
 import Basket from "./pages/basket/Basket";
 import Wishlist from "./pages/wishlist/Wishlist";
+import Register from "./pages/auth/register/Register";
+import Login from "./pages/auth/login/Login";
+import ForgotPassword from "./pages/auth/forgotpassword/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +54,18 @@ const router = createBrowserRouter([
       {
         path: "/productdetail/:id",
         element: <ProductDetail />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/forgotpassword",
+        element: <ForgotPassword />,
       },
     ],
   },

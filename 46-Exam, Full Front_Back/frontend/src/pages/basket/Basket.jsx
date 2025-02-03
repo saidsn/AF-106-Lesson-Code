@@ -3,7 +3,6 @@ import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteBasket } from "../../redux/features/BasketSlice";
 
-
 const Basket = () => {
   const { basket } = useSelector((state) => state.basket);
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ const Basket = () => {
               <tr style={{ textAlign: "center" }} key={product._id}>
                 <td>
                   <img
-                    src={product.image}
+                    src={`http://localhost:5000/${product.image}`}
                     alt=""
                     style={{ width: "100px", height: "100px" }}
                   />

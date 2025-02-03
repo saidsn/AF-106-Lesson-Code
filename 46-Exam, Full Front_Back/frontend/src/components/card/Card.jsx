@@ -36,7 +36,7 @@ const Card = ({ product }) => {
           />
         </div>
         <div className="image">
-          <img src={product?.image} alt="" />
+          <img src={`http://localhost:5000/${product.image}`} alt="" />
         </div>
         <div className="content">
           <div className="card-title">{product?.title}</div>

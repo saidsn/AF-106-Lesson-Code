@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import productSlice from "../features/ProductSlice";
 import basketSlice from "../features/BasketSlice";
 import wishlistSlice from "../features/WishlistSlice";
+import userSlice from "../features/UserSlice";
 
 const persistProductConfig = {
   key: "product",
@@ -35,6 +36,7 @@ export const store = configureStore({
     products: persistedProductReducer,
     basket: persistedBasketReducer,
     wishlist: persistedWishlistReducer,
+    user: userSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
