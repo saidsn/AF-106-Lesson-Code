@@ -1,14 +1,14 @@
 import user from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import userLoginValidationSchema from "../middleware/validation/userLoginValidation.js";
 import { generateToken } from "../utils/generateToken.js";
 import { recieveMail } from "../middleware/mailer/mailer.js";
 import jwt from "jsonwebtoken";
-import userRegisterValidationSchema from "../middleware/validation/userRegisterValidation.js";
+import RegisterValidationSchema from "../middleware/validation/RegisterValidation.js";
+import LoginValidationSchema from "../middleware/validation/LoginValidation.js";
+import ForgotValidationSchema from "../middleware/validation/ForgotValidation.js";
+import ResetValidationSchema from "../middleware/validation/ResetValidation.js";
 
 export const register = async (req, res) => {
-  console.log(req.body);
-
   try {
     const { name, username, email, password } = req.body;
 
@@ -16,7 +16,7 @@ export const register = async (req, res) => {
 
     const imageUrl = `images/${filename}`.replace(/\\/g, "/");
 
-    const { error } = userRegisterValidationSchema.validate({
+    const { error } = RegisterValidationSchema.validate({
       name,
       username,
       email,
@@ -78,33 +78,38 @@ export const verifyEmail = async (req, res) => {
     return res.status(400).json({ message: "Token not valid or expaired in" });
   }
 };
+
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  try {
+    const { username, password } = req.body;
 
-  const { error } = userLoginValidationSchema.validate(req.body);
+    const { error } = LoginValidationSchema.validate(req.body);
 
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    const existUser = await user.findOne({ username: username });
+
+    if (!existUser) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, existUser.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Username or Password wrong" });
+    }
+
+    generateToken(existUser._id, res);
+
+    return res.status(200).json({
+      message: "User logged in successfully",
+      existUser,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
-
-  const existUser = await user.findOne({ username: username });
-
-  if (!existUser) {
-    return res.status(400).json({ message: "User not found" });
-  }
-
-  const isMatch = await bcrypt.compare(password, existUser.password);
-
-  if (!isMatch) {
-    return res.status(400).json({ message: "Username or Password wrong" });
-  }
-
-  generateToken(existUser._id, res);
-
-  return res.status(200).json({
-    message: "User logged in successfully",
-    existUser,
-  });
 };
 
 export const logout = (req, res) => {
@@ -115,6 +120,12 @@ export const logout = (req, res) => {
 export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
+
+    const { error } = ForgotValidationSchema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
 
     const existUser = await user.findOne({ email });
 
@@ -127,6 +138,37 @@ export const forgotPassword = async (req, res) => {
     recieveMail(existUser, resetLink);
 
     return res.status(200).json({ message: "Reset link sent to your email" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    const { error } = ResetValidationSchema.validate({
+      password,
+    });
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const existUser = await user.findById(decoded.id);
+
+    if (!existUser) {
+      return res.status(400).json({ message: "Token not valid or expaired" });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    existUser.password = hashedPassword;
+
+    await existUser.save();
+
+    return res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

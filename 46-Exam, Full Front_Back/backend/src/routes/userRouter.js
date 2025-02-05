@@ -4,6 +4,7 @@ import {
   login,
   logout,
   register,
+  resetPassword,
   verifyEmail,
 } from "../controllers/userController.js";
 import upload from "../upload/upload.js";
@@ -15,6 +16,6 @@ userRouter.get("/verify/:token", verifyEmail);
 userRouter.post("/login", login);
 userRouter.post("/logout", logout);
 userRouter.post("/forgotpassword", forgotPassword);
-
+userRouter.post("/resetpassword", resetPassword);
 
 export default userRouter;

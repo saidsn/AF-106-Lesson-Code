@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { forgotschema } from "../../../schema/ForgotSchema";
 import axios from "axios";
 
 const ForgotPassword = () => {
   const baseUrl = `http://localhost:5000/auth`;
-  const [email, setEmail] = useState("");
 
   const submitForm = async (values, actions) => {
     try {
@@ -47,6 +46,7 @@ const ForgotPassword = () => {
           <label htmlFor="username">Email</label>
           <div className="text-danger">{errors.email}</div>
           <input
+            placeholder="Enter your email"
             type="text"
             id="email"
             name="email"

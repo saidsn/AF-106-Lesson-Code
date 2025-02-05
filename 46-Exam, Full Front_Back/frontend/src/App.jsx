@@ -13,6 +13,7 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login/Login";
 import ForgotPassword from "./pages/auth/forgotpassword/ForgotPassword";
+import Resetpassword from "./pages/auth/resetpassword/Resetpassword";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/forgotpassword",
         element: <ForgotPassword />,
+      },
+      {
+        path: "/resetpassword/:token",
+        element: <Resetpassword />,
       },
     ],
   },
