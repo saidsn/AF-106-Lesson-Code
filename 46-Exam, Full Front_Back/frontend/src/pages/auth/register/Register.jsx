@@ -16,7 +16,9 @@ const Register = () => {
       formData.append("email", values.email);
       formData.append("password", values.password);
 
-      await axios.post(`${baseUrl}/register`, formData);
+      await axios.post(`${baseUrl}/register`, formData, {
+        withCredentials: true,
+      });
 
       actions.resetForm();
 

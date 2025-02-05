@@ -8,7 +8,9 @@ const ForgotPassword = () => {
 
   const submitForm = async (values, actions) => {
     try {
-      const res = await axios.post(`${baseUrl}/forgotpassword`, values);
+      const res = await axios.post(`${baseUrl}/forgotpassword`, values, {
+        withCredentials: true,
+      });
       if (res.status === 200) {
         alert("Check your email to reset your password");
       } else {

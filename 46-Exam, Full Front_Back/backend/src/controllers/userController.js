@@ -45,9 +45,9 @@ export const register = async (req, res) => {
 
     await newUser.save();
 
-    const token = generateToken(newUser._id, res);
+    generateToken(newUser._id, res);
 
-    const confirmLink = `${process.env.SERVER_LINK}/auth/verify/${token}`;
+    const confirmLink = `${process.env.SERVER_LINK}/auth/verify`;
 
     recieveMail(newUser, confirmLink);
 
@@ -62,8 +62,8 @@ export const register = async (req, res) => {
 
 export const verifyEmail = async (req, res) => {
   try {
-    const { token } = req.params;
-
+    const token = req.cookies.token;
+    
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const updatedVerify = await user.findByIdAndUpdate(
@@ -131,9 +131,9 @@ export const forgotPassword = async (req, res) => {
 
     if (!existUser) return res.status(404).json({ message: "User not found" });
 
-    const resetToken = generateToken(existUser._id, res);
+    generateToken(existUser._id, res, "resetToken");
 
-    const resetLink = `${process.env.CLIENT_LINK}/resetpassword/${resetToken}`;
+    const resetLink = `${process.env.CLIENT_LINK}/resetpassword`;
 
     recieveMail(existUser, resetLink);
 
@@ -144,8 +144,11 @@ export const forgotPassword = async (req, res) => {
 };
 
 export const resetPassword = async (req, res) => {
+  console.log();
+  console.log(req.body);
+
   try {
-    const { token, password } = req.body;
+    const { password } = req.body;
 
     const { error } = ResetValidationSchema.validate({
       password,
@@ -155,7 +158,15 @@ export const resetPassword = async (req, res) => {
       return res.status(400).json({ message: error.details[0].message });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const resetToken = req.cookies.resetToken;
+
+    if (!resetToken) {
+      return res
+        .status(400)
+        .json({ message: "No token found, request new one" });
+    }
+
+    const decoded = jwt.verify(resetToken, process.env.JWT_SECRET);
 
     const existUser = await user.findById(decoded.id);
 
@@ -167,6 +178,8 @@ export const resetPassword = async (req, res) => {
     existUser.password = hashedPassword;
 
     await existUser.save();
+
+    res.clearCookie("resetToken");
 
     return res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {

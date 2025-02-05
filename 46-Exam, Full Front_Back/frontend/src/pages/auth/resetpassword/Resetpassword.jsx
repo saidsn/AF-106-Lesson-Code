@@ -1,19 +1,24 @@
 import { useFormik } from "formik";
 import React from "react";
 import { resetschema } from "../../../schema/ResetSchema";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Resetpassword = () => {
   const baseUrl = `http://localhost:5000/auth`;
-
-  const { token } = useParams();
-
   const navigate = useNavigate();
 
   const submitForm = async (values, actions) => {
     try {
-      const result = await axios.post(`${baseUrl}/resetpassword`, values);
+      const { password } = values;
+
+      const result = await axios.post(
+        `${baseUrl}/resetpassword`,
+        {
+          password,
+        },
+        { withCredentials: true }
+      );
       if (result.status === 200) {
         alert("Password reset successfully");
       } else {
@@ -28,7 +33,6 @@ const Resetpassword = () => {
 
   const { values, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
-      token: token,
       password: "",
       confirmpassword: "",
     },

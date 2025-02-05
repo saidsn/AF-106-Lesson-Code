@@ -11,14 +11,18 @@ const app = express();
 
 //middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend URL
+    credentials: true, // Cookie'leri göndermek için
+  })
+);
 app.use(cookieParser());
 
 //routes
 app.use("/api/products", productRouter);
 app.use("/auth", userRouter);
 app.use("/images", express.static("src/images"));
-
 
 app.get("/", (req, res) => {
   res.send("Hello World");

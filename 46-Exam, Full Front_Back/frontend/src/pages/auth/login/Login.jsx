@@ -82,7 +82,7 @@ const Login = () => {
         </span>
 
         <button type="submit" className="btn btn-primary">
-          Sign-Up
+          Sign-In
         </button>
 
         <span>
